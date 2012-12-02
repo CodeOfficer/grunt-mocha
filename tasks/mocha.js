@@ -17,14 +17,14 @@ module.exports = function(grunt) {
   // Grunt utilities.
   var task = grunt.task;
   var file = grunt.file;
-  var utils = grunt.utils;
+  var util = grunt.util;
   var log = grunt.log;
   var verbose = grunt.verbose;
   var fail = grunt.fail;
   var option = grunt.option;
   var config = grunt.config;
   var template = grunt.template;
-  
+
   // Nodejs libs.
   var fs = require('fs');
   var path = require('path');
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
   // External libs.
   var Tempfile = require('temporary/lib/file');
   var growl;
-  
+
   // Growl is optional
   try {
     growl = require('growl');
@@ -128,7 +128,7 @@ module.exports = function(grunt) {
       log.writeln();
       grunt.warn('PhantomJS timed out, possibly due to a missing Mocha run() call.', 90);
     },
-    
+
     // console.log pass-through.
     // console: console.log.bind(console),
     // Debugging messages.
@@ -144,15 +144,15 @@ module.exports = function(grunt) {
     var urls = file.expandFileURLs(this.file.src);
     // Get additional configuration
     var config = {};
-    
-    if (utils.kindOf(this.data) === 'object') {
-      config = utils._.clone(this.data);
+
+    if (util.kindOf(this.data) === 'object') {
+      config = util._.clone(this.data);
       delete config.src;
     }
 
     var configStr = JSON.stringify(config);
     verbose.writeln('Additional configuration: ' + configStr);
-    
+
     // This task is asynchronous.
     var done = this.async();
 
@@ -160,7 +160,7 @@ module.exports = function(grunt) {
     status = {failed: 0, passed: 0, total: 0, duration: 0};
 
     // Process each filepath in-order.
-    utils.async.forEachSeries(urls, function(url, next) {
+    util.async.forEachSeries(urls, function(url, next) {
       var basename = path.basename(url);
       verbose.subhead('Testing ' + basename).or.write('Testing ' + basename);
 
@@ -278,7 +278,7 @@ module.exports = function(grunt) {
   // ==========================================================================
 
   grunt.registerHelper('phantomjs', function(options) {
-    return utils.spawn({
+    return util.spawn({
       cmd: 'phantomjs',
       args: options.args
     }, function(err, result, code) {

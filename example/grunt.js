@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     // Grunt utilities.
     var task = grunt.task;
     var file = grunt.file;
-    var utils = grunt.utils;
+    var util = grunt.util;
     var log = grunt.log;
     var verbose = grunt.verbose;
     var fail = grunt.fail;
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
             //     ],
             //     tasks: 'mocha'
             // },
-            
+
             // If you want to watch files and run tests automatically on change
             test: {
                 files: [ 'js/**/*.js', 'test/spec/**/*.js' ],
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
             // you want. You can split them up into different groups here
             // ex: admin: [ 'test/admin.html' ]
             all: [ 'test/**/!(test2).html' ],
-            
+
             // Runs 'test/test2.html' with specified mocha options.
             // This variant auto-includes 'mocha-helper.js' so you do not have
             // to include it in your HTML spec file. Instead, you must add an
@@ -62,19 +62,19 @@ module.exports = function(grunt) {
                     grep: 'food'
                 },
 
-                // Indicates whether 'mocha.run()' should be executed in 
+                // Indicates whether 'mocha.run()' should be executed in
                 // 'mocha-helper.js'
                 run: true
             }
         }
     });
-    
+
     // @DEBUG Remove this line in your grunt file, this is just for testing
     grunt.loadTasks('../tasks');
 
     // Alias 'test' to 'mocha' so you can run `grunt test`
     task.registerTask('test', 'mocha');
-    
+
     // Default task.
     task.registerTask('default', 'mocha');
 
